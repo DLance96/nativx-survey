@@ -19,7 +19,7 @@ def convert_status_to_pi_content_item(s):
         'language': s.lang,
         'content': s.text,
         'created': 1000 * s.GetCreatedAtInSeconds(),
-        'reply': (s.in_reply_to_status_id == None),
+        'reply': (s.in_reply_to_status_id is None),
         'forward': False
     }
 
