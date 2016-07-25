@@ -4,13 +4,61 @@
     <div class="panel panel-default">
         <div class="panel-heading">NativX Travel Survey</div>
         <div class="panel-body">
+            {% if error_message %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error_message }}
+                </div>
+            {% endif %}
             <form action="" method="post">
                 {% csrf_token %}
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1">@</span>
-                    <input id="id_twitter" name="twitter" type="text" class="form-control" placeholder="Twitter Handle" aria-describedby="basic-addon1">
+                    <input id="id_twitter" name="twitter" type="text" class="form-control" placeholder="Twitter Handle"
+                           aria-describedby="basic-addon1">
                 </div>
-                <br>
+
+                <div class=" col-lg-6 ">
+                    <h1>Eat</h1>
+                    <table class="table table-condensed">
+                        <thead style="font-weight:bold;">
+                        <tr>
+                            <td>Activity:</td>
+                            <td>Opinion:</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for form in eat_rating_forms %}
+                            <tr>
+                                {% for field in form %}
+                                    <td>{{ field.label_tag }}</td>
+                                    <td>{{ field }}</td>
+                                    </tr>
+                                {% endfor %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class=" col-lg-6 ">
+                    <h1>Play</h1>
+                    <table class="table table-condensed">
+                        <thead style="font-weight:bold;">
+                        <tr>
+                            <td>Activity:</td>
+                            <td>Opinion:</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for form in play_rating_forms %}
+                            <tr>
+                                {% for field in form %}
+                                    <td>{{ field.label_tag }}</td>
+                                    <td>{{ field }}</td>
+                                    </tr>
+                                {% endfor %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
                 <input type="submit" value="Submit"/>
             </form>
         </div>

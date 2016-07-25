@@ -23,7 +23,6 @@ def convert_status_to_pi_content_item(s):
         'forward': False
     }
 
-
 handle = sys.argv[1]
 
 twitter_api = twitter.Api(consumer_key=config.twitter_consumer_key,

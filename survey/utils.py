@@ -1,4 +1,6 @@
 import random
+import twitter
+import config
 
 
 EAT_OPTIONS_FILE = "eat_options.txt"
@@ -31,8 +33,29 @@ def get_random_options(num, option_list):
 
 
 def get_eat_options(num):
-    return get_random_options(num, EAT_OPTIONS_FILE)
+    return get_random_options(num, get_all_eat_options())
 
 
 def get_play_options(num):
-    return get_random_options(num, PLAY_OPTIONS_FILE)
+    return get_random_options(num, get_all_play_options())
+
+
+def forms_is_valid(form_list):
+    for form in form_list:
+        if not form.is_valid():
+            return False
+    return True
+
+
+def validate_user(user):
+    """ Function not originally from link above. Returns whether or not twitter user is real """
+    twitter_api = twitter.Api(consumer_key=config.twitter_consumer_key,
+                              consumer_secret=config.twitter_consumer_secret,
+                              access_token_key=config.twitter_access_token,
+                              access_token_secret=config.twitter_access_secret, )
+
+    try:
+        twitter_api.GetUser(screen_name=user)
+        return True
+    except twitter.error.TwitterError:
+        return False
