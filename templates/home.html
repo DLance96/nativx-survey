@@ -6,6 +6,11 @@
         <div class="panel-body">
             <form action="" method="post">
                 {% csrf_token %}
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">@</span>
+                    <input id="id_twitter" name="twitter" type="text" class="form-control" placeholder="Twitter Handle" aria-describedby="basic-addon1">
+                </div>
+                <br>
                 <input type="submit" value="Submit"/>
             </form>
         </div>
