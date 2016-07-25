@@ -2,7 +2,7 @@
 db.sqlite3
 
 # Twitter, Watson, Database config
-config.py
+survey/config.py
 
 # static root folder
 static-root/*
@@ -96,3 +96,4 @@ ENV/
 
 # Rope project settings
 .ropeproject
+.idea/
