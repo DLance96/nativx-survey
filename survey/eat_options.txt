@@ -64,7 +64,6 @@ Mexican
 Middle Eastern
 Modern European
 Mongolian
-Music Venues
 Persian/Iranian
 Pizza
 Polish
@@ -92,4 +91,3 @@ Vegetarian
 Venues & Event Spaces
 Vietnamese
 Wine Bars
-
