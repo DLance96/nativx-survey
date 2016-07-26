@@ -5,6 +5,6 @@ app_name = 'survey'
 
 urlpatterns = [
     url(r'^$', views.home, name="home"),
-    url(r'^finished/$', views.home, name="finished"),
+    url(r'^finished/$', views.finished, name="finished"),
 
 ]

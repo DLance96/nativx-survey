@@ -41,7 +41,8 @@ def home(request):
             twitter_json = twitteranalyzer.run(request.POST['twitter'])
             eat_json = json.dumps(eat_data)
             play_json = json.dumps(play_data)
-            return HttpResponseRedirect(reverse('survey:home'))
+            print "What"
+            return HttpResponseRedirect(reverse('survey:finished'))
 
     context = {
         'eat_rating_forms': eat_rating_forms,
