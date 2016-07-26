@@ -3,6 +3,8 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 import utils
 import forms
+import json
+import twitteranalyzer
 
 
 def home(request):
@@ -20,16 +22,25 @@ def home(request):
 
         if utils.forms_is_valid(eat_rating_forms) and utils.forms_is_valid(play_rating_forms) \
                 and utils.validate_user(request.POST['twitter']):
+            eat_data = []
+            play_data = []
             for form in eat_rating_forms:
+                eat_element = {}
                 for field in form:
-                    print unicode(field.label)
+                    eat_element['activity'] = unicode(field.label)
                 instance = form.cleaned_data
-                print instance['rating']
+                eat_element['rating'] = instance['rating']
+                eat_data.append(eat_element)
             for form in play_rating_forms:
+                play_element = {}
                 for field in form:
-                    print unicode(field.label)
+                    play_element['activity'] = unicode(field.label)
                 instance = form.cleaned_data
-                print instance['rating']
+                play_element['rating'] = instance['rating']
+                play_data.append(play_element)
+            twitter_json = twitteranalyzer.run(request.POST['twitter'])
+            eat_json = json.dumps(eat_data)
+            play_json = json.dumps(play_data)
             return HttpResponseRedirect(reverse('survey:home'))
 
     context = {
