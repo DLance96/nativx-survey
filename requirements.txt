@@ -1,5 +1,7 @@
 Django==1.9.8
 future==0.15.2
+mysql==0.0.1
+MySQL-python==1.2.5
 oauthlib==1.1.2
 python-twitter==3.1
 requests==2.10.0

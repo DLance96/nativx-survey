@@ -4,7 +4,8 @@ from django.http import HttpResponseRedirect
 import utils
 import forms
 import json
-import twitteranalyzer
+import personality_analyzer
+import commit_to_sql
 
 
 def home(request):
@@ -38,10 +39,10 @@ def home(request):
                 instance = form.cleaned_data
                 play_element['rating'] = instance['rating']
                 play_data.append(play_element)
-            twitter_json = twitteranalyzer.run(request.POST['twitter'])
+            personality_json = personality_analyzer.run_twitter(request.POST['twitter'])
             eat_json = json.dumps(eat_data)
             play_json = json.dumps(play_data)
-            print "What"
+            commit_to_sql.add_record(personality_json, eat_json, play_json)
             return HttpResponseRedirect(reverse('survey:finished'))
 
     context = {
