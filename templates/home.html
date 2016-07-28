@@ -19,18 +19,13 @@
                 <div class=" col-lg-12 ">
                     <br>
                     <a class="btn btn-primary" data-toggle="collapse" href="#textEntry" aria-expanded="false"
-                       aria-controls="collapseExample">
-                        Enter Text Instead
+                       aria-controls="" style="margin-bottom: 20px">
+                        Custom Text Option
                     </a>
+                    <br>
                 </div>
                 <div class="collapse" id="textEntry">
-                    <br>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">@</span>
-                        <input id="id_text" name="text" type="text" class="form-control"
-                               placeholder="Twitter Handle"
-                               aria-describedby="basic-addon1">
-                    </div>
+                    {{ form.as_p }}
                 </div>
 
 

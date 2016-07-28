@@ -20,3 +20,10 @@ class ActivityRatingForm(forms.Form):
 
     def __str__(self):
         return self.fields['rating'].label
+
+
+class TextInputForm(forms.Form):
+    textInput = forms.CharField(required=False, label="",
+                                widget=forms.Textarea(attrs=
+                                                      {'rows': 8, 'style': 'width: 100%', 'class': 'form-control',
+                                                       'placeholder': 'Custom Text Input'}))
