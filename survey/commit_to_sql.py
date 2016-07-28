@@ -1,5 +1,6 @@
 import MySQLdb
 import config
+import sys
 
 
 def get_connection():
@@ -12,14 +13,16 @@ def get_connection():
     return connection
 
 
-def add_record(personailty, eat_activities, play_activities):
+def add_record(personality, eat_activities, play_activities):
     db = get_connection()
     cursor = db.cursor()
-    query = "INSERT INTO activity_personailty (personallity, activities_eat, activities_play) VALUES (%s, %s, %s)" \
-            % (personailty, eat_activities, play_activities)
+    query = "INSERT INTO activity_personality (personality, activities_eat, activities_play) VALUES ('%s', '%s', '%s')" \
+            % (personality, eat_activities, play_activities)
     try:
         cursor.execute(query)
         db.commit()
     except:
+        print("Unexpected error:", sys.exc_info()[0])
+        raise
         db.rollback()
     db.close()

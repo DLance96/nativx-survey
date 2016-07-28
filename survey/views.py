@@ -39,7 +39,7 @@ def home(request):
                 instance = form.cleaned_data
                 play_element['rating'] = instance['rating']
                 play_data.append(play_element)
-            personality_json = personality_analyzer.run_twitter(request.POST['twitter'])
+            personality_json = json.dumps(personality_analyzer.run_twitter(request.POST['twitter']))
             eat_json = json.dumps(eat_data)
             play_json = json.dumps(play_data)
             commit_to_sql.add_record(personality_json, eat_json, play_json)
