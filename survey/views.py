@@ -40,7 +40,7 @@ def home(request):
                 instance = form.cleaned_data
                 play_element['rating'] = instance['rating']
                 play_data.append(play_element)
-            if request.POST['textInput'] is not "":
+            if request.POST['textInput'] != '':
                 text = re.sub(r'[^\x00-\x7F]+', ' ', request.POST['textInput'])
                                                 # Remove non-ASCII
                 personality_json = json.dumps(personality_analyzer.run_text(text))
@@ -48,7 +48,7 @@ def home(request):
                 personality_json = json.dumps(personality_analyzer.run_twitter(request.POST['twitter']))
             eat_json = json.dumps(eat_data)
             play_json = json.dumps(play_data)
-            commit_to_sql.add_record(personality_json, eat_json, play_json)
+            # commit_to_sql.add_record(personality_json, eat_json, play_json)
             return HttpResponseRedirect(reverse('survey:finished'))
 
     context = {
