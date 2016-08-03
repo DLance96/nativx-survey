@@ -26,7 +26,7 @@ SECRET_KEY = '@*bl9s$d1ok^c+@pe3x#_noh8&#&1l-l@h6y(vb1cm^*8mh(yw'
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'nativx-survey.us-east-1.elasticbeanstalk.com/'
+    '*'
 ]
 
 
