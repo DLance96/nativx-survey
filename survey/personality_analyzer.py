@@ -30,7 +30,6 @@ def run_twitter(handle):
                               access_token_key=config.twitter_access_token,
                               access_token_secret=config.twitter_access_secret, )
 
-
     max_id = None
     statuses = []
     for x in range(0, 16):  # Pulls max number of tweets from an account
