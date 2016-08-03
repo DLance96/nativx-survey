@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
+from django.shortcuts import render_to_response
+from django.template import RequestContext
 from django.http import HttpResponseRedirect
 import utils
 import forms
@@ -48,7 +50,7 @@ def home(request):
                 personality_json = json.dumps(personality_analyzer.run_twitter(request.POST['twitter']))
             eat_json = json.dumps(eat_data)
             play_json = json.dumps(play_data)
-            # commit_to_sql.add_record(personality_json, eat_json, play_json)
+            commit_to_sql.add_record(personality_json, eat_json, play_json)
             return HttpResponseRedirect(reverse('survey:finished'))
 
     context = {
@@ -65,3 +67,31 @@ def finished(request):
 
     }
     return render(request, "finished.html", context)
+
+
+def handler404(request):
+    response = render_to_response('404.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 404
+    return response
+
+
+def handler500(request):
+    response = render_to_response('500.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 500
+    return response
+
+
+def handler404(request):
+    response = render_to_response('404.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 404
+    return response
+
+
+def handler400(request):
+    response = render_to_response('400.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 400
+    return response
