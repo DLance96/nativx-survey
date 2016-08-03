@@ -3,6 +3,7 @@
 #
 
 import sys
+import os
 import requests
 import json
 import twitter
@@ -25,10 +26,10 @@ def convert_status_to_pi_content_item(s):
 
 
 def run_twitter(handle):
-    twitter_api = twitter.Api(consumer_key=config.twitter_consumer_key,
-                              consumer_secret=config.twitter_consumer_secret,
-                              access_token_key=config.twitter_access_token,
-                              access_token_secret=config.twitter_access_secret, )
+    twitter_api = twitter.Api(consumer_key=os.environ.get('TWITTER_CONSUMER_KEY'),
+                              consumer_secret=os.environ.get('TWITTER_CONSUMER_SECRET'),
+                              access_token_key=os.environ.get('TWITTER_ACCESS_TOKEN'),
+                              access_token_secret=os.environ.get('TWITTER_ACCESS_SECRET'), )
 
     max_id = None
     statuses = []
@@ -52,8 +53,8 @@ def run_twitter(handle):
     pi_content_items_array = map(convert_status_to_pi_content_item, statuses)
     pi_content_items = {'contentItems': pi_content_items_array}
 
-    r = requests.post(config.pi_url + '/v2/profile',
-                      auth=(config.pi_username, config.pi_password),
+    r = requests.post(os.environ.get('PI_URL') + '/v2/profile',
+                      auth=(os.environ.get('PI_USERNAME'), os.environ.get('PI_PASSWORD')),
                       headers={
                           'content-type': 'application/json',
                           'accept': 'application/json'
