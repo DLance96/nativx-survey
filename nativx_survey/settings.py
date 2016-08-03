@@ -25,7 +25,9 @@ SECRET_KEY = '@*bl9s$d1ok^c+@pe3x#_noh8&#&1l-l@h6y(vb1cm^*8mh(yw'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'nativx-survey.us-east-1.elasticbeanstalk.com/'
+]
 
 
 # Application definition
