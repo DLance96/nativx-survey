@@ -29,6 +29,7 @@ pi_password = 'sA6IrVsa6dgL'
 # USed to store personality insights and preferences on activities
 
 db_host = 'nativx-db.cgwaxbkpsxvg.us-east-1.rds.amazonaws.com'
+db_port = 3306
 db_user = 'nativxmaster'
 db_passwd = 'nativxtravel'
 db = "personality_insights"
