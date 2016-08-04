@@ -39,14 +39,18 @@ def run_twitter(handle):
                                                            count=200,
                                                            include_rts=False)
             status_count = len(statuses_portion)
-            max_id = statuses_portion[status_count - 1].id - 1  # get id of last tweet and bump below for next tweet set
+            if status_count is not 0:
+                max_id = statuses_portion[status_count - 1].id - 1
+                # get id of last tweet and bump below for next tweet set
         else:
             statuses_portion = twitter_api.GetUserTimeline(screen_name=handle,
                                                            count=200,
                                                            max_id=max_id,
                                                            include_rts=False)
             status_count = len(statuses_portion)
-            max_id = statuses_portion[status_count - 1].id - 1  # get id of last tweet and bump below for next tweet set
+            if status_count is not 0:
+                max_id = statuses_portion[status_count - 1].id - 1
+                # get id of last tweet and bump below for next tweet set
         for status in statuses_portion:
             statuses.append(status)
 
