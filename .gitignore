@@ -1,10 +1,6 @@
 # database file
 db.sqlite3
 
-# Twitter, Watson, Database config
-survey/config.py
-config.py
-
 # static root folder
 static-root/*
 

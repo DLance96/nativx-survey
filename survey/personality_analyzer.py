@@ -2,16 +2,15 @@
 # https://github.com/watson-developer-cloud/personality-insights-twitter-python/blob/master/twitteranalyzer.py
 #
 
-import sys
-import os
-import requests
 import json
+
+import requests
 import twitter
+
 import config
 
 
 def convert_status_to_pi_content_item(s):
-    # My code here
     return {
         'userid': str(s.user.id),
         'id': str(s.id),
@@ -26,10 +25,10 @@ def convert_status_to_pi_content_item(s):
 
 
 def run_twitter(handle):
-    twitter_api = twitter.Api(consumer_key=os.environ.get('TWITTER_CONSUMER_KEY'),
-                              consumer_secret=os.environ.get('TWITTER_CONSUMER_SECRET'),
-                              access_token_key=os.environ.get('TWITTER_ACCESS_TOKEN'),
-                              access_token_secret=os.environ.get('TWITTER_ACCESS_SECRET'), )
+    twitter_api = twitter.Api(consumer_key=config.twitter_consumer_key,
+                              consumer_secret=config.twitter_consumer_secret,
+                              access_token_key=config.twitter_access_token,
+                              access_token_secret=config.twitter_access_secret, )
 
     max_id = None
     statuses = []
@@ -57,8 +56,8 @@ def run_twitter(handle):
     pi_content_items_array = map(convert_status_to_pi_content_item, statuses)
     pi_content_items = {'contentItems': pi_content_items_array}
 
-    r = requests.post(os.environ.get('PI_URL') + '/v2/profile',
-                      auth=(os.environ.get('PI_USERNAME'), os.environ.get('PI_PASSWORD')),
+    r = requests.post(config.pi_url + '/v2/profile',
+                      auth=(config.pi_username, config.pi_password),
                       headers={
                           'content-type': 'application/json',
                           'accept': 'application/json'

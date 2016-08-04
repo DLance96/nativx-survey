@@ -1,14 +1,14 @@
-import os
 import sys
 import MySQLdb
+import config
 
 
 def get_connection():
     connection = MySQLdb.connect(
-        host=os.environ.get('DB_HOST'),
-        user=os.environ.get('DB_USER'),
-        passwd=os.environ.get('DB_PASSWD'),
-        db=os.environ.get('DB'),
+        host=config.db_host,
+        user=config.db_user,
+        passwd=config.db_passwd,
+        db=config.db,
     )
     return connection
 
