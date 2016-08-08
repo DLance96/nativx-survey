@@ -3,10 +3,10 @@ from django import forms
 
 class ActivityRatingForm(forms.Form):
     RATING_CHOICES = (
-        ('0', 'Would not go'),
+        ('0', 'No shot'),
         ('1', 'Probably would not go'),
         ('2', 'Probably would go'),
-        ('3', 'Would go')
+        ('3', 'Heck yea!')
     )
 
     rating = forms.ChoiceField(choices=RATING_CHOICES, required=False, label="", label_suffix='')
