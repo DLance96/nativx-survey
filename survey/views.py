@@ -22,7 +22,7 @@ def home(request):
         'eat_ratings': eat_ratings,
         'play_ratings': play_ratings,
     }
-    print utils.validate_user(request.POST['twitter'])
+
     if request.method == 'POST':
         if utils.validate_user(request.POST['twitter']) or request.POST['textInput'] is not "":
             eat_data = []
