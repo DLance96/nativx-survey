@@ -9,6 +9,8 @@ from django.template import RequestContext
 
 import forms
 import utils
+import personality_analyzer
+import commit_to_sql
 
 
 def home(request):
