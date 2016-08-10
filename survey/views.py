@@ -19,7 +19,7 @@ def home(request):
     text_form = forms.TextInputForm(request.POST or None)
 
     if request.method == 'POST':
-        if utils.validate_user(request.POST.get('twitter', False) or request.POST.get('textInput', False) is not ""):
+        if utils.validate_user(request.POST['twitter'] or request.POST['textInput'] is not ""):
             eat_data = []
             play_data = []
             print request.POST
