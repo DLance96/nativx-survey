@@ -24,6 +24,7 @@ def home(request):
     }
 
     if request.method == 'POST':
+        print "Am I getting POST"
         if utils.validate_user(request.POST['twitter'] or request.POST['textInput'] is not ""):
             eat_data = []
             play_data = []
