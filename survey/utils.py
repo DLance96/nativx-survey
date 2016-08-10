@@ -49,10 +49,10 @@ def forms_is_valid(form_list):
 
 def validate_user(user):
     """ Function not originally from link above. Returns whether or not twitter user is real """
-    twitter_api = twitter.Api(consumer_key=config.twitter_consumer_key,
-                              consumer_secret=config.twitter_consumer_secret,
-                              access_token_key=config.twitter_access_token,
-                              access_token_secret=config.twitter_access_secret, )
+    twitter_api = twitter.Api(consumer_key=os.environ.get('TWITTER_CONSUMER_KEY'),
+                              consumer_secret=os.environ.get('TWITTER_CONSUMER_SECRET'),
+                              access_token_key=os.environ.get('TWITTER_ACCESS_TOKEN'),
+                              access_token_secret=os.environ.get('TWITTER_ACCESS_SECRET'), )
 
     try:
         twitter_api.GetUser(screen_name=user)
