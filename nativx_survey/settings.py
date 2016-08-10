@@ -23,12 +23,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '@*bl9s$d1ok^c+@pe3x#_noh8&#&1l-l@h6y(vb1cm^*8mh(yw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
-    'nativx-survey.us-east-1.elasticbeanstalk.com/',
-    'ec2-54-209-106-225.compute-1.amazonaws.com',
-    'NativX-Survey.us-east-1.elasticbeanstalk.com'
+    '*',
+    # 'nativx-survey.us-east-1.elasticbeanstalk.com/',
+    # 'ec2-54-209-106-225.compute-1.amazonaws.com',
+    # 'nativx-survey.us-east-1.elasticbeanstalk.com/',
+    # '127.0.0.1:8000/',
+    # '162.254.154.180/'
 ]
 
 
@@ -126,7 +129,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static-root')
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
-    #'/var/www/static/',
+    '/var/www/static/',
 )
 
 
