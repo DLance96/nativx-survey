@@ -1,6 +1,6 @@
 import random
 import twitter
-import config
+import os
 
 
 EAT_OPTIONS_FILE = "eat_options.txt"
@@ -53,8 +53,6 @@ def validate_user(user):
                               consumer_secret=os.environ.get('TWITTER_CONSUMER_SECRET'),
                               access_token_key=os.environ.get('TWITTER_ACCESS_TOKEN'),
                               access_token_secret=os.environ.get('TWITTER_ACCESS_SECRET'))
-    print "Twitter API created"
-
     try:
         twitter_api.GetUser(screen_name=user)
         return True
