@@ -17,12 +17,16 @@ def home(request):
     eat_ratings = utils.get_eat_options(10)
     play_ratings = utils.get_play_options(10)
     text_form = forms.TextInputForm(request.POST or None)
-
+    context = {
+        'form': text_form,
+        'eat_ratings': eat_ratings,
+        'play_ratings': play_ratings,
+    }
+    print utils.validate_user(request.POST['twitter'])
     if request.method == 'POST':
-        if utils.validate_user(request.POST['twitter'] or request.POST['textInput'] is not ""):
+        if utils.validate_user(request.POST['twitter']) or request.POST['textInput'] is not "":
             eat_data = []
             play_data = []
-            print request.POST
             for eat_rating in utils.get_all_eat_options():
                 eat_element = dict()
                 eat_element['activity'] = eat_rating
@@ -53,12 +57,9 @@ def home(request):
             play_json = json.dumps(play_data)
             commit_to_sql.add_record(personality_json, eat_json, play_json)
             return HttpResponseRedirect(reverse('survey:finished'))
+        else:
+            return render(request, "home.html", context)
 
-    context = {
-        'form': text_form,
-        'eat_ratings': eat_ratings,
-        'play_ratings': play_ratings,
-    }
     return render(request, "home.html", context)
 
 
