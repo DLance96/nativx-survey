@@ -1,53 +1,52 @@
-from django.shortcuts import render
+import json
+import re
+
 from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.http import HttpResponseRedirect
-import utils
+
 import forms
-import json
-import personality_analyzer
-import commit_to_sql
-import re
+import utils
 
 
 def home(request):
-    eat_rating_forms = []
-    play_rating_forms = []
+    eat_ratings = utils.get_eat_options(10)
+    play_ratings = utils.get_play_options(10)
     text_form = forms.TextInputForm(request.POST or None)
 
-    for counter, option in enumerate(utils.get_eat_options(10)):
-        form = forms.ActivityRatingForm(request.POST or None, prefix=counter, label=option)
-        eat_rating_forms.append(form)
-    for counter, option in enumerate(utils.get_play_options(10)):
-        form = forms.ActivityRatingForm(request.POST or None, prefix=counter + 10, label=option)
-        play_rating_forms.append(form)
-
     if request.method == 'POST':
-        if utils.forms_is_valid(eat_rating_forms) and utils.forms_is_valid(play_rating_forms) \
-                and (utils.validate_user(request.POST['twitter']) or request.POST['textInput'] is not ""):
+        if utils.validate_user(request.POST.get('twitter', False) or request.POST.get('textInput', False) is not ""):
             eat_data = []
             play_data = []
-            for form in eat_rating_forms:
-                eat_element = {}
-                for field in form:
-                    eat_element['activity'] = unicode(field.label)
-                instance = form.cleaned_data
-                eat_element['rating'] = instance['rating']
-                eat_data.append(eat_element)
-            for form in play_rating_forms:
-                play_element = {}
-                for field in form:
-                    play_element['activity'] = unicode(field.label)
-                instance = form.cleaned_data
-                play_element['rating'] = instance['rating']
-                play_data.append(play_element)
+            print request.POST
+            for eat_rating in utils.get_all_eat_options():
+                eat_element = dict()
+                eat_element['activity'] = eat_rating
+                request_label = eat_rating + '_eat'
+                rating = request.POST.get(request_label, False)
+                if not rating:
+                    pass
+                else:
+                    eat_element['rating'] = int(rating)
+                    eat_data.append(eat_element)
+            for play_rating in utils.get_all_play_options():
+                play_element = dict()
+                play_element['activity'] = play_rating
+                request_label = play_rating + '_play'
+                rating = request.POST.get(request_label, False)
+                if not rating:
+                    pass
+                else:
+                    play_element['rating'] = int(rating)
+                    play_data.append(play_element)
             if request.POST['textInput'] != '':
-                text = re.sub(r'[^\x00-\x7F]+', ' ', request.POST['textInput'])
-                                                # Remove non-ASCII
+                text = re.sub(r'[^\x00-\x7F]+', ' ', request.POST.get('textInput', False))
+                # Remove non-ASCII
                 personality_json = json.dumps(personality_analyzer.run_text(text))
             else:
-                personality_json = json.dumps(personality_analyzer.run_twitter(request.POST['twitter']))
+                personality_json = json.dumps(personality_analyzer.run_twitter(request.POST.get('twitter', False)))
             eat_json = json.dumps(eat_data)
             play_json = json.dumps(play_data)
             commit_to_sql.add_record(personality_json, eat_json, play_json)
@@ -55,14 +54,13 @@ def home(request):
 
     context = {
         'form': text_form,
-        'eat_rating_forms': eat_rating_forms,
-        'play_rating_forms': play_rating_forms,
+        'eat_ratings': eat_ratings,
+        'play_ratings': play_ratings,
     }
     return render(request, "home.html", context)
 
 
 def finished(request):
-
     context = {
 
     }

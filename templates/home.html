@@ -28,6 +28,13 @@
                     {{ form.as_p }}
                 </div>
 
+                <p>
+                    Please selected a rating from 1-4 for each of the respective categories.<br>
+                    1: No way (would not go if suggested)<br>
+                    2: We'll see (would take some convincing, but might go)<br>
+                    3: Why not (would go but could be convince not to go)<br>
+                    4: Heck yea (would go if offered)<br>
+                </p>
 
                 <div class=" col-lg-6 ">
                     <h1>Eat</h1>
@@ -35,17 +42,21 @@
                         <thead style="font-weight:bold;">
                         <tr>
                             <td>Activity:</td>
-                            <td>Opinion:</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
                         </tr>
                         </thead>
                         <tbody>
-                        {% for form in eat_rating_forms %}
+                        {% for eat_rating in eat_ratings %}
                             <tr>
-                                {% for field in form %}
-                                    <td>{{ field.label_tag }}</td>
-                                    <td>{{ field }}</td>
-                                    </tr>
-                                {% endfor %}
+                                <td>{{ eat_rating }}</td>
+                                <td><input type="radio" name="{{ eat_rating }}_eat" value="1" checked></td>
+                                <td><input type="radio" name="{{ eat_rating }}_eat" value="2"></td>
+                                <td><input type="radio" name="{{ eat_rating }}_eat" value="3"></td>
+                                <td><input type="radio" name="{{ eat_rating }}_eat" value="4"></td>
+                            </tr>
                         {% endfor %}
                         </tbody>
                     </table>
@@ -56,17 +67,21 @@
                         <thead style="font-weight:bold;">
                         <tr>
                             <td>Activity:</td>
-                            <td>Opinion:</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
                         </tr>
                         </thead>
                         <tbody>
-                        {% for form in play_rating_forms %}
+                        {% for play_rating in play_ratings %}
                             <tr>
-                                {% for field in form %}
-                                    <td>{{ field.label_tag }}</td>
-                                    <td>{{ field }}</td>
-                                    </tr>
-                                {% endfor %}
+                                <td>{{ play_rating }}</td>
+                                <td><input type="radio" name="{{ play_rating }}_play" value="1" checked></td>
+                                <td><input type="radio" name="{{ play_rating }}_play" value="2"></td>
+                                <td><input type="radio" name="{{ play_rating }}_play" value="3"></td>
+                                <td><input type="radio" name="{{ play_rating }}_play" value="4"></td>
+                            </tr>
                         {% endfor %}
                         </tbody>
                     </table>

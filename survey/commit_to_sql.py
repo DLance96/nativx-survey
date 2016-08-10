@@ -8,7 +8,7 @@ def get_connection():
         host=os.environ.get('DB_HOST'),
         user=os.environ.get('DB_USER'),
         passwd=os.environ.get('DB_PASSWD'),
-        db=os.environ.get('DB'),
+        db=os.environ.get('DB')
     )
     return connection
 

@@ -8,12 +8,12 @@ PLAY_OPTIONS_FILE = "play_options.txt"
 
 
 def get_all_eat_options():
-    eat_options = [line.rstrip('\n') for line in open(EAT_OPTIONS_FILE)]
+    eat_options = [line.strip() for line in open(EAT_OPTIONS_FILE)]
     return eat_options
 
 
 def get_all_play_options():
-    play_options = [line.rstrip('\n') for line in open(PLAY_OPTIONS_FILE)]
+    play_options = [line.strip() for line in open(PLAY_OPTIONS_FILE)]
     return play_options
 
 
