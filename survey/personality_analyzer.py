@@ -71,8 +71,8 @@ def run_twitter(handle):
 
 
 def run_text(text):
-    r = requests.post(config.pi_url + '/v2/profile',
-                      auth=(config.pi_username, config.pi_password),
+    r = requests.post(os.environ.get('PI_URL') + '/v2/profile',
+                      auth=(os.environ.get('PI_USERNAME'), os.environ.get('PI_PASSWORD')),
                       headers={
                           'content-type': 'text/plain',
                           'accept': 'application/json'
